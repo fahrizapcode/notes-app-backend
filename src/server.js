@@ -1,24 +1,26 @@
 import Hapi from '@hapi/hapi';
 import routes from './routes.js';
-import process from 'process';
+
 const init = async () => {
   const server = Hapi.server({
     port: 5000,
-    host: process.env.Node_ENV !== 'production' ? 'localhost' : '0.0.0.0',
-
+    host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',
     routes: {
-      // penyebab permintaan ditolak oleh cors adalah ketika kita memiliki 2 origin atau lebih yang berbeda, sehingga kita perlu mengaturnya disini
       cors: {
-        origin: ['*'], // Origin yang diperbolehkan
-        // headers: ['Accept', 'Authorization', 'Content-Type', 'If-None-Match'],
-        // credentials: true, // Pastikan cookie dapat dikirim jika diperlukan
+        origin: ['*'], // Jangan gunakan '*' di produksi, ganti dengan origin yang diperbolehkan
       },
     },
   });
 
   server.route(routes);
-  await server.start();
-  console.log(`Server berjalan pada ${server.info.uri}`);
+
+  try {
+    await server.start();
+    console.log(`Server berjalan pada ${server.info.uri}`);
+  } catch (err) {
+    console.error('Error starting server:', err);
+    process.exit(1);
+  }
 };
 
 init();

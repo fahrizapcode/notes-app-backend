@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon ./src/server.js",
-    "start:prod": "NODE_ENV=production node ./src/server.js",
+    "start:prod": "cross-env NODE_ENV=production node ./src/server.js",
     "lint": "eslint ./src"
   },
   "type": "module",
@@ -15,6 +15,7 @@
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.15.0",
+    "cross-env": "^7.0.3",
     "eslint": "^9.15.0",
     "eslint-config-dicodingacademy": "^0.9.4",
     "globals": "^15.12.0",
