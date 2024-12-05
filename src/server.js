@@ -1,10 +1,9 @@
 import Hapi from '@hapi/hapi';
 import routes from './routes.js';
-
+import process from 'process';
 const init = async () => {
   const server = Hapi.server({
     port: 5000,
-    // eslint-disable-next-line no-undef
     host: process.env.Node_ENV !== 'production' ? 'localhost' : '0.0.0.0',
 
     routes: {
