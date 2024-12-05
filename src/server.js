@@ -4,7 +4,8 @@ import routes from './routes.js';
 const init = async () => {
   const server = Hapi.server({
     port: 5000,
-    host: 'localhost',
+    // eslint-disable-next-line no-undef
+    host: process.env.Node_ENV !== 'production' ? 'localhost' : '0.0.0.0',
 
     routes: {
       // penyebab permintaan ditolak oleh cors adalah ketika kita memiliki 2 origin atau lebih yang berbeda, sehingga kita perlu mengaturnya disini
